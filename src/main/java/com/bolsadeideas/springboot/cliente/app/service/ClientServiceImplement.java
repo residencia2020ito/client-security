@@ -30,13 +30,13 @@ public class ClientServiceImplement implements ClientService {
 			target.setDate(new Date());
 			usersDao.registerClient(target);
 		}
+		
+	
 
 	}
 
 	@Override
-	public void updateInfoClient(RegisterClientTO r) {
-		
-		
+	public void updateInfoClient(RegisterClientTO r) {		
 		
 
 	}
