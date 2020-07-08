@@ -37,6 +37,7 @@ public class ClientServiceImplement implements ClientService {
 	public void updateInfoClient(RegisterClientTO r) {
 		
 		
+		
 
 	}
 
