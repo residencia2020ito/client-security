@@ -11,17 +11,8 @@ public interface UsersDao {
 	 * @param p Contraseña
 	 * @return
 	 */
-	public boolean validateLogin(String u, String p);
-
-	public void registerClient(Cliente c);
-
-	/**
-	 * Comprueba si el usuario ya existe
-	 * 
-	 * @param u Usuario
-	 */
-	public boolean existUsername(String u);
+	public Cliente validateLogin(String u, String p);
 
 	
-	public void updateClient(String u);
+	
 }
