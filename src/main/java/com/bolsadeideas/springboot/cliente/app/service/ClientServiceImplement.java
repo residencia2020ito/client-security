@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.bolsadeideas.springboot.cliente.app.controllers.LoginController;
 import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
+<<<<<<< Updated upstream
+=======
+import com.bolsadeideas.springboot.cliente.app.models.Cliente;
+import com.bolsadeideas.springboot.cliente.app.models.request.RegisterClientTO;
+import com.mx.yoconsumo.commons.session.security.utils.NotificationUtil;
+>>>>>>> Stashed changes
 
 @Service
 public class ClientServiceImplement implements ClientService {

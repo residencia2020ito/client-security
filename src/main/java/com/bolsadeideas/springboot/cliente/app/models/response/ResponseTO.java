@@ -3,15 +3,16 @@ package com.bolsadeideas.springboot.cliente.app.models.response;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bolsadeideas.springboot.cliente.app.models.Notification;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mx.yoconsumo.commons.session.security.model.Notification;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Data
 @JsonInclude(Include.NON_NULL)

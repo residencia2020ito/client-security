@@ -18,11 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
+<<<<<<< Updated upstream
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 import com.bolsadeideas.springboot.cliente.app.models.Notification;
+=======
+
+>>>>>>> Stashed changes
 import com.bolsadeideas.springboot.cliente.app.models.request.LoginTO;
 import com.bolsadeideas.springboot.cliente.app.models.response.ResponseTO;
-import com.bolsadeideas.springboot.cliente.app.utils.NotificationUtil;
+import com.mx.yoconsumo.commons.session.security.model.Notification;
+import com.mx.yoconsumo.commons.session.security.utils.NotificationUtil;
+
 
 
 
