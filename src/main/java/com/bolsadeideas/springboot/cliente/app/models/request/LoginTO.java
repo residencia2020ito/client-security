@@ -11,9 +11,9 @@ import lombok.Data;
 public class LoginTO {
 
 
-	@NotBlank
+	//@NotBlank(message = "Campo username vacio")
 	private String username;
-	@NotBlank
+	//@NotBlank(message = "Campo password vacio")
 	private String password;
 	
 }
