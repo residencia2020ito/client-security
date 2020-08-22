@@ -1,7 +1,5 @@
 package com.bolsadeideas.springboot.cliente.app.models.response;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

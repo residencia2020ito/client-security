@@ -1,14 +1,15 @@
 package com.bolsadeideas.springboot.cliente.app.service;
 
-import com.bolsadeideas.springboot.cliente.app.models.request.RegisterClientTO;
+import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 
 public interface ClientService {
 
-    public void registerClient(RegisterClientTO r);
+	public Cliente resendVerificEmail(String email);
 	
+	public Cliente resendModifyPassword(String email);
 	
+	public void updatePassword(String idC,String codV,String password);
 	
-	public void updateInfoClient(RegisterClientTO r);
-	
+	public boolean statusAccount (String idC,String codV);
 	
 }

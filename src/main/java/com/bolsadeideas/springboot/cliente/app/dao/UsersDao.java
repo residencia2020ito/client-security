@@ -13,16 +13,29 @@ public interface UsersDao {
 	 */
 	public Cliente validateLogin(String u, String p);
 
-	public void registerClient(Cliente c);
 
 	/**
-	 * Comprueba si el usuario ya existe
-	 * 
-	 * @param u Usuario
+	 * Cambia el estado de la cuenta del cliente si su correo es verificado
+	 * @param c ID cliente
+	 * @param cv Codigo de verificacion
 	 */
-	public boolean existUsername(String u);
-
+	public boolean statusAccountEmail(String idC,String cv);
 	
-	public void updateClient(String u);
+	/**
+	 * Reenvio de correo verficacion al cliente
+	 * @param email
+	 * @return
+	 */
+	public Cliente searchClientEmail(String email);
 	
+	/**
+	 * Actualiza la fecha en el reenvio de correo de verificacion
+	 * @param idClient
+	 */
+	public void updateVerficationTime(String idClient);
+	
+	/**
+	 * Actualiza la contraseña con una nueva
+	 */
+	public void resetPassword(String idClient,String codVerifit,String password);
 }

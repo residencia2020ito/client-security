@@ -40,5 +40,9 @@ public class Cliente implements Serializable{
 	private String firstParStreet;//Primera calle paralela
 	private String secondParStreet;//Segunda calle paralela
 	private String idDevice;//ID firebase
+	private boolean verificEmail;//verificacion de correo boolean
+	private String codVerification;//codigo de verificacion
+	private Date verficationTime;//Hora de envio de correo devificacion
+
 	
 }
