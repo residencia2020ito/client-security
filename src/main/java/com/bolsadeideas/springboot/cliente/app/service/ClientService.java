@@ -1,12 +1,13 @@
 package com.bolsadeideas.springboot.cliente.app.service;
 
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
+import com.mx.yoconsumo.commons.session.security.model.Notification;
 
 public interface ClientService {
 
-	public Cliente resendVerificEmail(String email);
+	public String resendVerificEmail(String email);
 	
-	public Cliente resendModifyPassword(String email);
+	public String resendModifyPassword(String email);
 	
 	public void updatePassword(String idC,String codV,String password);
 	

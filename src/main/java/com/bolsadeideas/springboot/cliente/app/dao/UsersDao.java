@@ -23,6 +23,8 @@ public interface UsersDao {
 	
 	/**
 	 * Reenvio de correo verficacion al cliente
+	 * Devuelve:
+	 * id_,name,username,email,verificEmail,codVerification,verficationTime,verificEmail
 	 * @param email
 	 * @return
 	 */

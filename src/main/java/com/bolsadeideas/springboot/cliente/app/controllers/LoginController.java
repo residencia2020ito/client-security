@@ -68,7 +68,7 @@ public class LoginController {
 				loginInfoTO.setLastName(cliente.getLastName());
 				loginInfoTO.setSecondLastName(cliente.getSecondLastName());
 
-				notification.setCodigo("0000000003");
+				notification.setCodigo("00100");
 				notification.setDescripcion("Acceso concedido al cliente ");
 				HttpSession httpSession = httpServletRequest.getSession();
 				response.addNotification(notification);
@@ -84,7 +84,7 @@ public class LoginController {
 				log.debug("ID cliente ingresado a la session: " + cliente.getId());
 
 			} else {
-				notification.setCodigo("0000000000");
+				notification.setCodigo("00101");
 				notification.setDescripcion("Acceso denegado, verificar cuenta de correo");
 				response.addNotification(notification);
 			}
@@ -94,7 +94,7 @@ public class LoginController {
 					HttpStatus.ACCEPTED);
 			return responseEntity;
 		}
-		NotificationUtil.send("0000000004", "Datos incorrectos ingresados en el login");
+		NotificationUtil.send("00102", "Datos incorrectos ingresados en el login");
 		return null;
 
 	}
@@ -111,8 +111,8 @@ public class LoginController {
 		httpServletRequest.getSession().invalidate();
 		Notification notification = new Notification();
 		ResponseTO response = new ResponseTO();
-		notification.setCodigo("0000000000");
-		notification.setDescripcion("Sesión cerrada correctamente cliente");
+		notification.setCodigo("00103");
+		notification.setDescripcion("Sesión cerrada correctamente del cliente");
 		response.addNotification(notification);
 		return response;
 	}

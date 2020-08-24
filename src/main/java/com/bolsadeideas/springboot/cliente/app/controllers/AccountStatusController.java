@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 import com.bolsadeideas.springboot.cliente.app.models.request.VerificAccountTO;
+import com.bolsadeideas.springboot.cliente.app.models.response.Email;
 import com.bolsadeideas.springboot.cliente.app.service.ClientServiceImplement;
 import com.mx.yoconsumo.commons.session.security.annotation.NonValidateSession;
 import com.mx.yoconsumo.commons.session.security.model.Notification;
@@ -27,36 +28,37 @@ import com.mx.yoconsumo.commons.session.security.response.ResponseTO;
 @CrossOrigin(origins = "*")
 @RequestMapping("/secutity")
 public class AccountStatusController {
-	
+
 	@Autowired
 	private UsersDao usersDao;
-	
+
 	@Autowired
-	ClientServiceImplement  clientServiceImplement;
+	ClientServiceImplement clientServiceImplement;
 
 	/**
 	 * CAMBIA EL CAMPO DE VERIFICACION(verificEmail) DEL CLIENTE EN LA BD
-	 * @param idC ID DEL CLIENTE
+	 * 
+	 * @param idC  ID DEL CLIENTE
 	 * @param codV CODIGO DE VERIFICACION
 	 * @return RESPUESTA SI CAMBIO EL ESTADO
 	 */
 	@RequestMapping(path = "/verificationEmail", method = RequestMethod.POST)
 	@NonValidateSession
-	public ResponseEntity<ResponseTO>  verificationEmail(HttpServletRequest httpServletRequest,
-			@Valid @RequestBody VerificAccountTO request){
-			
-		boolean status =clientServiceImplement.statusAccount(request.getId(), request.getCodVerification());
-		
+	public ResponseEntity<ResponseTO> verificationEmail(HttpServletRequest httpServletRequest,
+			@Valid @RequestBody VerificAccountTO request) {
+
+		boolean status = clientServiceImplement.statusAccount(request.getId(), request.getCodVerification());
+
 		Notification notification = new Notification();
 		ResponseTO response = new ResponseTO();
-		if(status) {
-			notification.setCodigo("0000000000");
+		if (status) {
+			notification.setCodigo("00104");
 			notification.setDescripcion("Cuenta verificada del cliente con exito");
-			response.addNotification(notification);	
-		}else {
-			notification.setCodigo("0000000000");
+			response.addNotification(notification);
+		} else {
+			notification.setCodigo("00105");
 			notification.setDescripcion("Error en verificar cuenta del cliente");
-			response.addNotification(notification);	
+			response.addNotification(notification);
 		}
 
 		HttpHeaders hr = new HttpHeaders();
@@ -64,9 +66,10 @@ public class AccountStatusController {
 		ResponseEntity<ResponseTO> responseEntity = new ResponseEntity<ResponseTO>(response, hr, HttpStatus.OK);
 		return responseEntity;
 	}
-	
+
 	/**
 	 * REENVIO DE CORREO PARA VERIFICACION DE LA CUENTA
+	 * 
 	 * @param httpServletRequest
 	 * @param request
 	 * @return
@@ -77,23 +80,18 @@ public class AccountStatusController {
 			@Valid @RequestBody VerificAccountTO request) {
 		Notification notification = new Notification();
 		ResponseTO response = new ResponseTO();
-		
-		Cliente cliente= clientServiceImplement.resendVerificEmail(request.getEmail());
-		if(Objects.nonNull(cliente)) {
-			notification.setCodigo("0000000000");
-			notification.setDescripcion("Envio de correo para verificar cuenta");
-			response.addNotification(notification);	
-		}else {
-			notification.setCodigo("0000000000");
-			notification.setDescripcion("Correo no existente a ningun usuario");
-			response.addNotification(notification);	
-		}
+
+		Email email = new Email();
+		email.setEmail(clientServiceImplement.resendVerificEmail(request.getEmail()));
+		notification.setCodigo("00106");
+		notification.setDescripcion("El correo de verificacion fue enviado con exito");
+		response.setData(email);
+		response.addNotification(notification);
 
 		HttpHeaders hr = new HttpHeaders();
 		hr.set("x-hr", "00000");
 		ResponseEntity<ResponseTO> responseEntity = new ResponseEntity<ResponseTO>(response, hr, HttpStatus.OK);
 		return responseEntity;
 	}
-	
-	
+
 }

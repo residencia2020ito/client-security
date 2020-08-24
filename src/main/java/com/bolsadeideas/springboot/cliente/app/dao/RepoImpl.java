@@ -68,6 +68,8 @@ public class RepoImpl implements UsersDao {
 
 	/**
 	 * Busca datos del cliente por el email recibido
+	 * Devuelve:
+	 * id_,name,username,email,verificEmail,codVerification,verficationTime,verificEmail
 	 */
 	@Override
 	public Cliente searchClientEmail(String email) {
@@ -76,6 +78,8 @@ public class RepoImpl implements UsersDao {
 		Query query = new Query();
 		query.addCriteria(criterioBusqueda);
 		query.fields().include("_id");
+		query.fields().include("name");
+		query.fields().include("username");
 		query.fields().include("email");
 		query.fields().include("verificEmail");
 		query.fields().include("codVerification");
