@@ -26,7 +26,7 @@ import com.mx.yoconsumo.commons.session.security.response.ResponseTO;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/secutity")
+@RequestMapping("/security")
 public class AccountStatusController {
 
 	@Autowired

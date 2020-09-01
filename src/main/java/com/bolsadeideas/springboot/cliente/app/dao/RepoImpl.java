@@ -33,7 +33,8 @@ public class RepoImpl implements UsersDao {
 	@Override
 	public Cliente validateLogin(String u, String p) {
 		Query query = new Query();
-		Criteria criterioBusqueda = Criteria.where("username").is(u);
+		Criteria criterioBusqueda = new Criteria();
+		criterioBusqueda.orOperator(Criteria.where("username").is(u),Criteria.where("email").is(u));
 		query.addCriteria(criterioBusqueda);
 		Cliente a = mongoTemplate.findOne(query, Cliente.class);
 		if (Objects.nonNull(a)) {
