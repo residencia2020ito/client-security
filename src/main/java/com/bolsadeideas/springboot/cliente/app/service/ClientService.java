@@ -1,7 +1,6 @@
 package com.bolsadeideas.springboot.cliente.app.service;
 
-import com.bolsadeideas.springboot.cliente.app.models.Cliente;
-import com.mx.yoconsumo.commons.session.security.model.Notification;
+import com.bolsadeideas.springboot.cliente.app.models.ShoppingCart;
 
 public interface ClientService {
 
@@ -12,5 +11,7 @@ public interface ClientService {
 	public void updatePassword(String idC,String codV,String password);
 	
 	public boolean statusAccount (String idC,String codV);
+	
+	public void crateShoppingCart(ShoppingCart cart);
 	
 }

@@ -1,7 +1,5 @@
 package com.bolsadeideas.springboot.cliente.app.controllers;
 
-import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 import com.bolsadeideas.springboot.cliente.app.models.request.ModifyPasswordTO;
 import com.bolsadeideas.springboot.cliente.app.models.request.VerificAccountTO;
 import com.bolsadeideas.springboot.cliente.app.models.response.Email;

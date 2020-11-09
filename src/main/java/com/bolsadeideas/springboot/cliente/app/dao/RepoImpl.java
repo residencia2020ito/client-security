@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
+import com.bolsadeideas.springboot.cliente.app.models.ShoppingCart;
 
 @Repository
 public class RepoImpl implements UsersDao {
@@ -123,6 +124,45 @@ public class RepoImpl implements UsersDao {
 		
 		mongoTemplate.updateFirst(query, update, Cliente.class);
 		
+	}
+
+	/**
+	 * Busca carrito de compras personal en la bd
+	 */
+	@Override
+	public boolean existCart(String idClient) {
+		
+		Criteria criterioBusqueda = Criteria.where("idClient").is(idClient);
+	    Query query = new Query();
+		query.addCriteria(criterioBusqueda);
+		boolean t = mongoTemplate.exists(query, ShoppingCart.class);	
+		return t;
+	}
+
+	/**
+	 * Crea carrito personal
+	 */
+	@Override
+	public void createShoppingCart(ShoppingCart cart) {
+		
+		mongoTemplate.save(cart);
+		
+	}
+	
+	/**
+	 * Actualiza la fecha y hora del carrito en sesion
+	 */
+	@Override
+	public void updateCreationDateCart(String idClient,String idSession) {
+		Criteria criterioBusqueda = Criteria.where("idClient").is(idClient);
+		Query query = new Query();
+		query.addCriteria(criterioBusqueda);
+		Update update = new Update();
+		update.set("idSession", idSession);
+		update.set("createCartDate", new Date());
+
+		mongoTemplate.updateFirst(query, update, ShoppingCart.class);
+
 	}
 	
 	

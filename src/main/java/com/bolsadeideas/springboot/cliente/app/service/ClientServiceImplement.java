@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 import com.bolsadeideas.springboot.cliente.app.models.SendEmail;
+import com.bolsadeideas.springboot.cliente.app.models.ShoppingCart;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mx.yoconsumo.commons.session.security.model.Notification;
 import com.mx.yoconsumo.commons.session.security.utils.NotificationUtil;
 
 @Service
@@ -65,8 +65,8 @@ public class ClientServiceImplement implements ClientService {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("name", cliente.getName());
 				map.put("username", cliente.getUsername());
-				map.put("liga", "http://localhost:8080/secutity/verificationEmail/?id=" + cliente.getId()
-						+ "&codVerification=" + cliente.getCodVerification());
+				map.put("liga", "http://localhost:4200/auth/confirmacount/?id=" + cliente.getId() + "&codVerification="
+						+ cliente.getCodVerification());
 				emailverifit.setMap(map);
 
 				String t = "";
@@ -124,8 +124,8 @@ public class ClientServiceImplement implements ClientService {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("name", cliente.getName());
 				map.put("username", cliente.getUsername());
-				map.put("liga", "http://localhost:8080/secutity/updatePassword/?id=" + cliente.getId()
-						+ "&codVerification=" + cliente.getCodVerification());
+				map.put("liga", "http://localhost:4200/auth/resetpassword/?id=" + cliente.getId() + "&codVerification="
+						+ cliente.getCodVerification());
 				emailModifyPass.setMap(map);
 
 				String t = "";
@@ -142,7 +142,8 @@ public class ClientServiceImplement implements ClientService {
 			NotificationUtil.send("00111", "Correo no verificado, verificar correo para cambiar contraseña");
 			return null;
 		}
-		NotificationUtil.send("00112", "Correo no registrado en la plataforma para enviar correo de restablecer contraseña");
+		NotificationUtil.send("00112",
+				"Correo no registrado en la plataforma para enviar correo de restablecer contraseña");
 		return null;
 	}
 
@@ -154,6 +155,22 @@ public class ClientServiceImplement implements ClientService {
 	public void updatePassword(String idC, String codV, String password) {
 
 		usersDao.resetPassword(idC, codV, passwordEncoder.encode(password));
+
+	}
+
+	/**
+	 * Creacion o actualizacion de creacion de carrito personal por sesion
+	 */
+	@Override
+	public void crateShoppingCart(ShoppingCart cart) {
+		boolean existCart = usersDao.existCart(cart.getIdClient());
+
+		if (existCart) {
+			usersDao.updateCreationDateCart(cart.getIdClient(), cart.getIdSession());
+		} else {
+			cart.setCreateCartDate(new Date());
+			usersDao.createShoppingCart(cart);
+		}
 
 	}
 

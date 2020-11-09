@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
+import com.bolsadeideas.springboot.cliente.app.models.ShoppingCart;
 import com.bolsadeideas.springboot.cliente.app.models.request.LoginTO;
 import com.bolsadeideas.springboot.cliente.app.models.response.LoginInfoTO;
 import com.bolsadeideas.springboot.cliente.app.service.ClientServiceImplement;
@@ -74,11 +75,23 @@ public class LoginController {
 				response.addNotification(notification);
 				response.setData(loginInfoTO);
 
+				/**
+				 * CREAMOS O BUSCAMOS EL CARRITO PERSONAL AL INICIAR SESION
+				 */
+				
+				ShoppingCart cart = new ShoppingCart();
+				cart.setIdClient(cliente.getId());
+				cart.setIdSession(httpSession.getId());
+				
+				
+				clientServiceImplement.crateShoppingCart(cart);
+				
 				PrincipalUser user = new PrincipalUser();
 				user.setId(cliente.getId());
 				user.setName(cliente.getName());
 				user.setLastName(cliente.getLastName());
 				user.setMiddleName(cliente.getSecondLastName());
+				user.setCorreo(cliente.getEmail());
 				user.setRoles(Arrays.asList("CLIENTE"));
 				httpSession.setAttribute(PrincipalUser.ATTRIBUTE_SESSION_NAME, user);
 				log.debug("ID cliente ingresado a la session: " + cliente.getId());

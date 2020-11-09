@@ -1,7 +1,5 @@
 package com.bolsadeideas.springboot.cliente.app.controllers;
 
-import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bolsadeideas.springboot.cliente.app.dao.UsersDao;
-import com.bolsadeideas.springboot.cliente.app.models.Cliente;
 import com.bolsadeideas.springboot.cliente.app.models.request.VerificAccountTO;
 import com.bolsadeideas.springboot.cliente.app.models.response.Email;
 import com.bolsadeideas.springboot.cliente.app.service.ClientServiceImplement;
@@ -29,8 +25,6 @@ import com.mx.yoconsumo.commons.session.security.response.ResponseTO;
 @RequestMapping("/security")
 public class AccountStatusController {
 
-	@Autowired
-	private UsersDao usersDao;
 
 	@Autowired
 	ClientServiceImplement clientServiceImplement;

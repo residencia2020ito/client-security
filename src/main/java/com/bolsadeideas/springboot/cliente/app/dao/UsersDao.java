@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.cliente.app.dao;
 
 import com.bolsadeideas.springboot.cliente.app.models.Cliente;
+import com.bolsadeideas.springboot.cliente.app.models.ShoppingCart;
 
 public interface UsersDao {
 
@@ -40,4 +41,22 @@ public interface UsersDao {
 	 * Actualiza la contraseña con una nueva
 	 */
 	public void resetPassword(String idClient,String codVerifit,String password);
+	
+	/**
+	 * Busca carrito de compras del cliente
+	 */
+	
+	public boolean existCart(String idClient);
+	
+	/**
+	 * Crea carrito de compras
+	 */
+	
+	public void createShoppingCart(ShoppingCart cart);
+	
+	/**
+	 * Actualiza la fecha y hoa dlcain session
+	 * @param idClient
+	 */
+	public void updateCreationDateCart(String idClient,String idSession);
 }
